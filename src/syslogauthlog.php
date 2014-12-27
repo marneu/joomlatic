@@ -33,7 +33,7 @@ class PlgSystemSyslogAuthLog extends JPlugin {
 	private $log_priority = array(
 					JLog::WARNING => 'WARNING',
 					JLog::INFO => 'INFO'
-				)
+				);
 
 
 	private function check_ip($ip)
