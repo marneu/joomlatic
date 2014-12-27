@@ -11,7 +11,7 @@ defined('_JEXEC') or die();
 
 class PlgSystemSyslogAuthLog extends JPlugin {
 	
-	private $format = '{PRIORITY} {EVENT} {USERNAME} {ADMIN} {MESSAGE} from {CLIENTIP}';
+	private $format = '{EVENT} {USERNAME} {ADMIN} {MESSAGE} from {CLIENTIP}';
 	private $syslog_options = array(
 				'sys_ident' => 'jauthlog',
 				'sys_add_pid' => true,
@@ -81,9 +81,7 @@ class PlgSystemSyslogAuthLog extends JPlugin {
 
 		$this->message_option['category'] = getenv('USER');
 
-		$this->field['CLIENTIP'] = $this->getAddr();
-		
-		$this->field['PRIORITY'] = $this->message_option['priority']	
+		$this->field['CLIENTIP'] = $this->getAddr();		
 
 		// Fill in field data for the line.
 		$message = $this->format;
