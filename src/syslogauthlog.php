@@ -87,7 +87,7 @@ class PlgSystemSyslogAuthLog extends JPlugin {
 
 		$this->field['CLIENTIP'] = $this->getAddr();
 		
-		$this->field['PRIORITY'] = $log_priority[$this->message_option['priority']];
+		$this->field['PRIORITY'] = $this->log_priority[$this->message_option['priority']];
 
 		// Fill in field data for the line.
 		$message = $this->format;
