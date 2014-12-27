@@ -15,12 +15,13 @@ A Syslog authentication logger plugin for Joomla 2.5 and 3, which logs selected 
 - Forgot username (not yet implemented)
 
 ## Which data is logged?
-see syslog for:
+System syslog sets:
+- Date
 - Time
-- Severity
 
-Plugin logs
-- system user (for virtual environments)
+Plugin logs:
+- Severity
+- System user (for virtual environments)
 - Event
 - Username
 - Details (if any)
@@ -58,6 +59,8 @@ Syslog level:
 Fail2ban can react on error conditions if you configure a block and a filter.
 
 For debian/ubuntu systems in jail.local:
+```ini
+…
  [joomla-admin]
  enabled  = true
  port     = http,ftp
@@ -66,7 +69,11 @@ For debian/ubuntu systems in jail.local:
  maxretry = 2
  bantime  = 84600
  findtime = 21150
+…
+```
 
 in filter.d/joomla-admin.conf
+```ini
  [Definition]
  failregex =  .* login admin ADMIN Benutzername und Passwort falsch .* from <HOST>$
+```
