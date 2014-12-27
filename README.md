@@ -46,11 +46,11 @@ The log entries will appear in your systems auth log directory (depending on dis
 
 ## (unix) syslog
 
-Format: 'Dec 27 13:14:14 host jauthlog[PID]: [SYSUSER] {EVENT} {USERNAME} {ADMIN} {MESSAGE} from {CLIENTIP}'
+Format: 'Dec 27 13:14:14 host jauthlog[PID]: [SYSUSER] {PRIORITY} {EVENT} {USERNAME} {ADMIN} {MESSAGE} from {CLIENTIP}'
 
 Syslog facility: LOG_AUTH
 
-Syslog level:
+Syslog priority:
 - LOG_INFO ~ Normal log entry
 - LOG_WARNING ~ Failure conditions
 
@@ -75,6 +75,6 @@ For debian/ubuntu systems in jail.local:
 in filter.d/joomla-admin.conf
 ```ini
  [Definition]
- failregex =  .* login admin ADMIN Benutzername und Passwort falsch .* from <HOST>$
+ failregex =  .* WARNING login admin ADMIN Benutzername und Passwort falsch .* from <HOST>$
 ```
 Adapt the message text 'Benutzername und Passwort falsch' to your own language before loading the jail.
