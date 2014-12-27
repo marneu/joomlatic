@@ -77,3 +77,4 @@ in filter.d/joomla-admin.conf
  [Definition]
  failregex =  .* login admin ADMIN Benutzername und Passwort falsch .* from <HOST>$
 ```
+Adapt the message text 'Benutzername und Passwort falsch' to your own language before loading the jail.
