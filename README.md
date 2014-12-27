@@ -10,9 +10,6 @@ A Syslog authentication logger plugin for Joomla 2.5 and 3, which logs selected 
 - User login failure
 - User logout
 - User logout failure
-- Password change (not yet implemented)
-- Forget password (not yet implemented)
-- Forgot username (not yet implemented)
 
 ## Which data is logged?
 System syslog sets:
