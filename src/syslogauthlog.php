@@ -30,6 +30,10 @@ class PlgSystemSyslogAuthLog extends JPlugin {
 			      );
 	private $field = array();
 	private $message_option = array();
+	private $log_priority = array(
+					JLog::WARNING => 'WARNING',
+					JLog::INFO => 'INFO'
+				)
 
 
 	private function check_ip($ip)
@@ -83,7 +87,7 @@ class PlgSystemSyslogAuthLog extends JPlugin {
 
 		$this->field['CLIENTIP'] = $this->getAddr();
 		
-		$this->field['PRIORITY'] = $this->message_option['priority']	
+		$this->field['PRIORITY'] = $log_priority[$this->message_option['priority']];
 
 		// Fill in field data for the line.
 		$message = $this->format;
