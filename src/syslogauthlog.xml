@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.4" type="plugin" group="system" method="upgrade">
+        <name>plg_system_syslogauthlog</name>       
+        <description>PLG_SYSTEM_SYSLOGAUTHLOG_DESCRIPTION</description>      
+        <author>Markus Neubauer</author>
+        <authorEmail>neubauer@email-online.org</authorEmail>  
+        <authorUrl>https://github.com/marneu/syslogauthlog</authorUrl>
+        <authorUrl>http://www.std-soft.com/index.php/hm-service/81-c-std-service-code/9-joomla-plugin-syslogauthlog</authorUrl>
+        <version>1.0.0-rc.1</version>   
+        <creationDate>December 2014</creationDate>
+
+        <copyright>Copyright (C) 2014 Markus Neubauer. All rights reserved.</copyright>
+        <license>http://www.gnu.org/licenses/agpl-3.0.html GNU/AGPL</license>
+
+        <files>
+                <filename plugin="syslogauthlog">syslogauthlog.php</filename>
+                <filename>index.html</filename>
+                <folder>language</folder>
+        </files>
+	<languages>
+		<language tag="en-GB">en-GB.plg_system_syslogauthlog.sys.ini</language>
+		<language tag="de-DE">de-DE.plg_system_syslogauthlog.sys.ini</language>
+	</languages>
+        <config>
+                <fields name="params">
+                        <fieldset name="basic">
+				<field name="mode" type="list"
+					default="1"
+					description="PLG_SYSTEM_SYSLOGAUTHLOG_MODE_DESC"
+					label="PLG_SYSTEM_SYSLOGAUTHLOG_MODE_LABEL"
+				>
+					<option value="0">PLG_SYSTEM_SYSLOGAUTHLOG_MODE_ALL</option>
+					<option value="1">PLG_SYSTEM_SYSLOGAUTHLOG_MODE_ERROR</option>
+                                </field>
+				<field name="event" type="list"
+					default="1"
+					description="PLG_SYSTEM_SYSLOGAUTHLOG_EVENT_DESC"
+					label="PLG_SYSTEM_SYSLOGAUTHLOG_EVENT_LABEL"
+				>
+					<option
+					value="0">PLG_SYSTEM_SYSLOGAUTHLOG_EVENT_ALL</option>
+					<option
+					value="1">PLG_SYSTEM_SYSLOGAUTHLOG_EVENT_LOGIN</option>
+					<option
+					value="2">PLG_SYSTEM_SYSLOGAUTHLOG_EVENT_LOGOUT</option>
+                                </field>
+				<field name="type" type="list"
+					default="1"
+					description="PLG_SYSTEM_SYSLOGAUTHLOG_TYPE_DESC"
+					label="PLG_SYSTEM_SYSLOGAUTHLOG_TYPE_LABEL"
+				>
+					<option
+					value="0">PLG_SYSTEM_SYSLOGAUTHLOG_TYPE_ALL</option>
+					<option
+					value="1">PLG_SYSTEM_SYSLOGAUTHLOG_TYPE_ADMIN</option>
+                                </field>
+                        </fieldset>
+                </fields>
+        </config>
+</extension>
