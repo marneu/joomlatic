@@ -2,6 +2,8 @@
 /*
  * @copyright  Copyright (C) 2014 Markus Neubauer. All rights reserved.
  * @license    http://www.gnu.org/licenses/agpl-3.0.html GNU/AGPL
+ * @github     https://github.com/marneu/syslogauthlog
+ * @homepage   http://www.std-soft.com/index.php/hm-service/81-c-std-service-code/9-joomla-plugin-syslogauthlog
  */
 
 defined('_JEXEC') or die();

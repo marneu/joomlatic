@@ -4,6 +4,7 @@
         <description>PLG_SYSTEM_SYSLOGAUTHLOG_DESCRIPTION</description>      
         <author>Markus Neubauer</author>
         <authorEmail>neubauer@email-online.org</authorEmail>  
+        <authorUrl>https://github.com/marneu/syslogauthlog</authorUrl>
         <authorUrl>http://www.std-soft.com/index.php/hm-service/81-c-std-service-code/9-joomla-plugin-syslogauthlog</authorUrl>
         <version>1.0.0-rc.1</version>   
         <creationDate>December 2014</creationDate>
