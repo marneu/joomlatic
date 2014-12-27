@@ -53,6 +53,20 @@ Syslog level:
 - LOG_INFO ~ Normal log entry
 - LOG_WARNING ~ Failure conditions
 
-## Special conifguration
+## Special configuration
 
 Fail2ban can react on error conditions if you configure a block and a filter.
+
+For debian/ubuntu systems in jail.local:
+ [joomla-admin]
+ enabled  = true
+ port     = http,ftp
+ filter   = joomla-admin
+ logpath  = /var/log/auth.log
+ maxretry = 2
+ bantime  = 84600
+ findtime = 21150
+
+in filter.d/joomla-admin.conf
+ [Definition]
+ failregex =  .* login admin ADMIN Benutzername und Passwort falsch .* from <HOST>$
