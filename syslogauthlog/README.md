@@ -72,6 +72,5 @@ For debian/ubuntu systems in jail.local:
 in filter.d/joomla-admin.conf
 ```ini
  [Definition]
- failregex =  .* WARNING login admin ADMIN Benutzername und Passwort falsch .* from <HOST>$
+ failregex =  .* WARNING login admin ADMIN .* from <HOST>$
 ```
-Adapt the message text 'Benutzername und Passwort falsch' to your own language before loading the jail.
