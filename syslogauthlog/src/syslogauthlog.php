@@ -1,9 +1,10 @@
 <?php
 /*
- * @copyright  Copyright (C) 2014 Markus Neubauer. All rights reserved.
- * @license    http://www.gnu.org/licenses/agpl-3.0.html GNU/AGPL
- * @github     https://github.com/marneu/syslogauthlog
- * @homepage   http://www.std-soft.com/index.php/hm-service/81-c-std-service-code/9-joomla-plugin-syslogauthlog
+ * @copyright	Copyright (C) 2014 Markus Neubauer. All rights reserved.
+ * @license	http://www.gnu.org/licenses/agpl-3.0.html GNU/AGPL
+ * @github	https://github.com/marneu/joomlatic/tree/master/syslogauthlog
+ * @homepage	http://www.std-soft.com/index.php/hm-service/81-c-std-service-code/9-joomla-plugin-syslogauthlog
+ * @version	1.0.6
  */
 
 defined('_JEXEC') or die();
@@ -12,28 +13,38 @@ defined('_JEXEC') or die();
 class PlgSystemSyslogAuthLog extends JPlugin {
 	
 	private $format = '{PRIORITY} {EVENT} {USERNAME} {ADMIN} {MESSAGE} from {CLIENTIP}';
+
 	private $syslog_options = array(
-				'sys_ident' => 'jauthlog',
-				'sys_add_pid' => true,
-				'sys_use_stderr' => false,
-				'sys_facility' => AUTH,
-				);
+		'sys_ident' 	 => 'jauthlog',
+		'sys_add_pid' 	 => true,
+		'sys_use_stderr' => false,
+		'sys_facility' 	 => LOG_AUTH
+		);
+
 	private $ignore_ip = array (
-				array('0.0.0.0','2.255.255.255'),
-				array('10.0.0.0','10.255.255.255'),
-				array('127.0.0.0','127.255.255.255'),
-				array('169.254.0.0','169.254.255.255'),
-				array('172.16.0.0','172.31.255.255'),
-				array('192.0.2.0','192.0.2.255'),
-				array('192.168.0.0','192.168.255.255'),
-				array('255.255.255.0','255.255.255.255')
-			      );
-	private $field = array();
-	private $message_option = array();
-	private $log_priority = array(
-					JLog::WARNING => 'WARNING',
-					JLog::INFO => 'INFO'
-				);
+		array('0.0.0.0','2.255.255.255'),
+		array('10.0.0.0','10.255.255.255'),
+		array('127.0.0.0','127.255.255.255'),
+		array('169.254.0.0','169.254.255.255'),
+		array('172.16.0.0','172.31.255.255'),
+		array('192.0.2.0','192.0.2.255'),
+		array('192.168.0.0','192.168.255.255'),
+		array('255.255.255.0','255.255.255.255')
+		);
+
+	public $priorities = array(
+                JLog::EMERGENCY => 'EMERG',
+                JLog::ALERT => 'ALERT',
+                JLog::CRITICAL => 'CRIT',
+                JLog::ERROR => 'ERR',
+                JLog::WARNING => 'WARNING',
+                JLog::NOTICE => 'NOTICE',
+                JLog::INFO => 'INFO',
+                JLog::DEBUG => 'DEBUG');
+
+	private $priority = JLog::INFO;
+
+	private $field = array( 'MESSAGE' => '' );
 
 
 	private function check_ip($ip)
@@ -85,25 +96,27 @@ class PlgSystemSyslogAuthLog extends JPlugin {
 			$this->field['ADMIN'] = '';
 		}
 
-		$this->message_option['category'] = getenv('USER');
-
 		$this->field['CLIENTIP'] = $this->getAddr();
-		
-		$this->field['PRIORITY'] = $this->log_priority[$this->message_option['priority']];
 
+
+		$this->field['PRIORITY'] = $this->priorities[$this->priority];
+		
 		// Fill in field data for the line.
 		$message = $this->format;
-		if (!isset($this->field['MESSAGE'])) $this->field['MESSAGE'] = '';
 
 		foreach ($this->field as $tmp => $val)
 		{
 			$message = str_replace('{' . $tmp . '}', $val, $message);
 		}
 
-		$jLogEntry = new JLogEntry($message, $this->message_option['priority'], $this->message_option['category']);
+		// setup the new entry for syslog.
+		$jLogEntry = new JLogEntry($message, $this->priority, getenv('USER'));
+//		$jLogEntry->priority = $this->priority;
+//		$jLogEntry->category = getenv('USER');
 
-		// Write the new entry to syslog.
+		// connect to syslog
 		$syslog = new JLogLoggerSyslog($this->syslog_options);
+		// Write the new entry to syslog.
 		$syslog::addEntry($jLogEntry);
 
 	}
@@ -113,7 +126,6 @@ class PlgSystemSyslogAuthLog extends JPlugin {
 
 		if ( $this->params->def('mode', 1) != 0 ) return;
 		if ( $this->params->def('event', 1) == 2 ) return;
-		$this->message_option['priority'] = JLog::INFO;
 		$this->field['EVENT'] = 'login';
 		$this->field['USERNAME'] = $options['user']->username;
 		$this->log();
@@ -123,7 +135,7 @@ class PlgSystemSyslogAuthLog extends JPlugin {
 	{
 
 		if ( $this->params->def('event', 1) == 2 ) return;
-		$this->message_option['priority'] = JLog::WARNING;
+		$this->priority = JLog::WARNING;
 		$this->field['EVENT'] = 'login';
 		$this->field['USERNAME'] = $response['username'];
 		$this->field['MESSAGE'] = $response['error_message'];
@@ -135,7 +147,6 @@ class PlgSystemSyslogAuthLog extends JPlugin {
 
 		if ( $this->params->def('mode', 1) != 0 ) return;
 		if ( $this->params->def('event', 1) == 1 ) return;
-		$this->message_option['priority'] = JLog::INFO;
 		$this->field['EVENT'] = 'logout';
 		$this->field['USERNAME'] = $options['username'];
 		$this->log();
@@ -145,7 +156,7 @@ class PlgSystemSyslogAuthLog extends JPlugin {
 	{
 
 		if ( $this->params->def('event', 1) == 1 ) return;
-		$this->message_option['priority'] = JLog::WARNING;
+		$this->priority = JLog::WARNING;
 		$this->field['EVENT'] = 'logout';
 		$this->field['USERNAME'] = $parameters['username'];
 		$this->field['MESSAGE'] = 'failure';
@@ -153,3 +164,4 @@ class PlgSystemSyslogAuthLog extends JPlugin {
 	}
 
 }
+?>
