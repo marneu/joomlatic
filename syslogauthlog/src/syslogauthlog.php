@@ -16,7 +16,7 @@ class PlgSystemSyslogAuthLog extends JPlugin {
 				'sys_ident' => 'jauthlog',
 				'sys_add_pid' => true,
 				'sys_use_stderr' => false,
-				'sys_facility' => LOG_AUTH,
+				'sys_facility' => AUTH,
 				);
 	private $ignore_ip = array (
 				array('0.0.0.0','2.255.255.255'),
@@ -53,19 +53,21 @@ class PlgSystemSyslogAuthLog extends JPlugin {
 
 	private function getAddr()
 	{
-		if ($this->check_ip($_SERVER["HTTP_CLIENT_IP"])) {
+		if (isset($_SERVER["HTTP_CLIENT_IP"]) && $this->check_ip($_SERVER["HTTP_CLIENT_IP"])) {
 			return $_SERVER["HTTP_CLIENT_IP"];
 		}
-		foreach (explode(",",$_SERVER["HTTP_X_FORWARDED_FOR"]) as $ip) {
-			if ($this->check_ip(trim($ip))) {
-				return $ip;
+		if ( isset($_SERVER["HTTP_X_FORWARDED_FOR"]) ) {
+			foreach (explode(",",$_SERVER["HTTP_X_FORWARDED_FOR"]) as $ip) {
+				if ($this->check_ip(trim($ip))) {
+					return $ip;
+					}
 			}
 		}
-		if ($this->check_ip($_SERVER["HTTP_X_FORWARDED"])) {
+		if ( isset($_SERVER["HTTP_X_FORWARDED"]) && $this->check_ip($_SERVER["HTTP_X_FORWARDED"])) {
 			return $_SERVER["HTTP_X_FORWARDED"];
-		} elseif ($this->check_ip($_SERVER["HTTP_FORWARDED_FOR"])) {
+		} elseif ( isset($_SERVER["HTTP_FORWARDED_FOR"]) && $this->check_ip($_SERVER["HTTP_FORWARDED_FOR"])) {
 			return $_SERVER["HTTP_FORWARDED_FOR"];
-		} elseif ($this->check_ip($_SERVER["HTTP_FORWARDED"])) {
+		} elseif ( isset($_SERVER["HTTP_FORWARDED"]) && $this->check_ip($_SERVER["HTTP_FORWARDED"])) {
 			return $_SERVER["HTTP_FORWARDED"];
 		} else {
 			return $_SERVER["REMOTE_ADDR"];
