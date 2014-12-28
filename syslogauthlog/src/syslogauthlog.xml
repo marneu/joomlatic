@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension version="3.4" type="plugin" group="system" method="upgrade">
+<extension version="3.3" type="plugin" group="system" method="upgrade">
         <name>plg_system_syslogauthlog</name>       
-        <description>PLG_SYSTEM_SYSLOGAUTHLOG_DESCRIPTION</description>      
+        <description>Set your options in plugin syslogauthlog and activate it to use it</description>      
         <author>Markus Neubauer</author>
         <authorEmail>neubauer@email-online.org</authorEmail>  
-        <authorUrl>https://github.com/marneu/syslogauthlog</authorUrl>
         <authorUrl>http://www.std-soft.com/index.php/hm-service/81-c-std-service-code/9-joomla-plugin-syslogauthlog</authorUrl>
-        <version>1.0.4</version>   
+        <version>1.0.5</version>   
         <creationDate>December 2014</creationDate>
 
         <copyright>Copyright (C) 2014 Markus Neubauer. All rights reserved.</copyright>
@@ -20,10 +19,6 @@
 		<language tag="en-GB">en-GB.plg_system_syslogauthlog.sys.ini</language>
 		<language tag="de-DE">de-DE.plg_system_syslogauthlog.sys.ini</language>
 	</languages>
-	<updateservers>
-		<server type="collection">http://example.com/list.xml</server>
-		<server type="extension" priority="2" name="My Extension's Updates">http://example.com/extension.xml</server>
-	</updateservers>
         <config>
                 <fields name="params">
                         <fieldset name="basic">
@@ -60,4 +55,9 @@
                         </fieldset>
                 </fields>
         </config>
+	<updateservers>
+		<server type="extension" priority="1" name="syslogauthlog Updates">
+			http://www.std-soft.com/syslogauthlog.xml
+		</server>
+	</updateservers>
 </extension>
