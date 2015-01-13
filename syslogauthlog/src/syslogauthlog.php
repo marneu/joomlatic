@@ -21,16 +21,23 @@ class PlgSystemSyslogAuthLog extends JPlugin {
 		'sys_facility' 	 => LOG_AUTH
 		);
 
+	// ranges know as private or virtual IP's (unused in public internet, see ieee.org)
 	private $ignore_ip = array (
 		array('0.0.0.0','2.255.255.255'),
 		array('10.0.0.0','10.255.255.255'),
 		array('127.0.0.0','127.255.255.255'),
 		array('169.254.0.0','169.254.255.255'),
 		array('172.16.0.0','172.31.255.255'),
+		array('192.0.0.0','192.0.0.255'),
+		array('192.0.2.0','192.0.2.255'),
+		array('192.88.99.0','192.88.99.255'),
 		array('192.168.0.0','192.168.255.255'),
-		array('255.255.255.0','255.255.255.255')
+		array('198.18.0.0','198.19.255.255'),
+		array('198.51.100.0','198.51.100.255'),
+		array('203.0.113.0','203.0.113.255'),
+		array('224.0.0.0','255.255.255.255')
 		);
-
+		
 	public $priorities = array(
                 JLog::EMERGENCY => 'EMERG',
                 JLog::ALERT => 'ALERT',
