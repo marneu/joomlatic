@@ -74,3 +74,5 @@ in filter.d/joomla-admin.conf
  [Definition]
  failregex =  .* WARNING login admin ADMIN .* from <HOST>$
 ```
+
+Version 1.0.8: Fix JLoggerSyslog usage in Joomla Verions 2

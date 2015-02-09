@@ -4,7 +4,7 @@
  * @license	http://www.gnu.org/licenses/agpl-3.0.html GNU/AGPL
  * @github	https://github.com/marneu/joomlatic/tree/master/syslogauthlog
  * @homepage	http://www.std-soft.com/index.php/hm-service/81-c-std-service-code/9-joomla-plugin-syslogauthlog
- * @version	1.0.6
+ * @version	1.0.8
  */
 
 defined('_JEXEC') or die();
@@ -51,7 +51,9 @@ class PlgSystemSyslogAuthLog extends JPlugin {
 	private $priority = JLog::INFO;
 
 	private $field = array( 'MESSAGE' => '' );
-
+	
+	private $version = JVERSION;
+	
 
 	private function check_ip($ip)
 	{
@@ -121,7 +123,13 @@ class PlgSystemSyslogAuthLog extends JPlugin {
 //		$jLogEntry->category = getenv('USER');
 
 		// connect to syslog
-		$syslog = new JLogLoggerSyslog($this->syslog_options);
+		if ( substr( $version, 0, 1) == '3' ) {
+			$syslog = new JLogLoggerSyslog($this->syslog_options);
+		} elseif ( substr( $version, 0, 1) == '2' ) {
+			$syslog = new JLoggerSyslog($this->syslog_options);
+		} else {
+			die ("Unsupported Joomla version for plg syslogauth.");
+		}
 		// Write the new entry to syslog.
 		$syslog::addEntry($jLogEntry);
 

@@ -7,4 +7,8 @@ A syslog authentication logger plugin for Joomla 2.5 and 3, which logs selected 
 
 - Development: https://github.com/marneu/joomlatic/tree/master/syslogauthlog
 - Homepage: http://www.std-soft.com/index.php/hm-service/81-c-std-service-code/9-joomla-plugin-syslogauthlog
-- Current Version: 1.0.7
+- Current Version: 1.0.8
+
+
+syslogauthlog v 1.0.8: Fix using JLoggerSyslog for Joomla 2 Versions
+
