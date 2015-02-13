@@ -10,6 +10,6 @@ A syslog authentication logger plugin for Joomla 2.5 and 3, which logs selected 
 - Current Version: 1.0.9
 
 
-syslogauthlog v 1.0.9: Fix $syslog usage context
+Version 1.1: Fix $syslog, $version usage context
 syslogauthlog v 1.0.8: Fix using JLoggerSyslog for Joomla 2 Versions
 

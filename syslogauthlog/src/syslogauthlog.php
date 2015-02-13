@@ -4,7 +4,7 @@
  * @license	http://www.gnu.org/licenses/agpl-3.0.html GNU/AGPL
  * @github	https://github.com/marneu/joomlatic/tree/master/syslogauthlog
  * @homepage	http://www.std-soft.com/index.php/hm-service/81-c-std-service-code/9-joomla-plugin-syslogauthlog
- * @version	1.0.9
+ * @version	1.1
  */
 
 defined('_JEXEC') or die();
@@ -124,9 +124,9 @@ class PlgSystemSyslogAuthLog extends JPlugin {
 //		$jLogEntry->category = getenv('USER');
 
 		// connect to syslog
-		if ( substr( $version, 0, 1) == '3' ) {
+		if ( substr( $this->version, 0, 1) == '3' ) {
 			$this->syslog = new JLogLoggerSyslog($this->syslog_options);
-		} elseif ( substr( $version, 0, 1) == '2' ) {
+		} elseif ( substr( $this->version, 0, 1) == '2' ) {
 			$this->syslog = new JLoggerSyslog($this->syslog_options);
 		} else {
 			die ("Unsupported Joomla version for plg syslogauth.");
