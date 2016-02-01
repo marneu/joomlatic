@@ -4,13 +4,22 @@
  * @license	http://www.gnu.org/licenses/agpl-3.0.html GNU/AGPL
  * @github	https://github.com/marneu/joomlatic/tree/master/syslogauthlog
  * @homepage	http://www.std-soft.com/index.php/hm-service/81-c-std-service-code/9-joomla-plugin-syslogauthlog
- * @version	1.1
+ * @version	1.3
  */
 
 defined('_JEXEC') or die();
 
+jimport('joomla.plugin');
 
 class PlgSystemSyslogAuthLog extends JPlugin {
+
+	/**
+	* Load the language file on instantiation.
+	*
+	* @var    boolean
+	* @since  3.1
+	*/
+    protected $autoloadLanguage = true;
 	
 	private $format = '{PRIORITY} {EVENT} {USERNAME} {ADMIN} {MESSAGE} from {CLIENTIP}';
 
@@ -54,7 +63,14 @@ class PlgSystemSyslogAuthLog extends JPlugin {
 	private $field = array( 'MESSAGE' => '' );
 	
 	private $version = JVERSION;
-	
+
+	public function __construct(&$subject, $config)
+	{
+		parent::__construct($subject, $config);
+		
+		$input = JFactory::getApplication()->input;
+		$hash  = JApplicationHelper::getHash('PlgSystemSyslogAuthLog');
+	}
 
 	private function check_ip($ip)
 	{
@@ -120,8 +136,6 @@ class PlgSystemSyslogAuthLog extends JPlugin {
 
 		// setup the new entry for syslog.
 		$jLogEntry = new JLogEntry($message, $this->priority, getenv('USER'));
-//		$jLogEntry->priority = $this->priority;
-//		$jLogEntry->category = getenv('USER');
 
 		// connect to syslog
 		if ( substr( $this->version, 0, 1) == '3' ) {
@@ -149,11 +163,19 @@ class PlgSystemSyslogAuthLog extends JPlugin {
 	public function onUserLoginFailure($response) 
 	{
 
+		// do not log canceled
+		if ( $response['status'] == JAuthentication::STATUS_SUCCESS ) return;
+		// log only if configured to do so
 		if ( $this->params->def('event', 1) == 2 ) return;
+		
+		$this->field['MESSAGE'] = $response['error_message'];
 		$this->priority = JLog::WARNING;
 		$this->field['EVENT'] = 'login';
-		$this->field['USERNAME'] = $response['username'];
-		$this->field['MESSAGE'] = $response['error_message'];
+		if ($this->params->get('log_username', 0)) {
+			$this->field['USERNAME'] = $response['username'];
+		} else {
+			$this->field['USERNAME'] = 'UNKNOWN';
+		}
 		$this->log();
 	}
 
