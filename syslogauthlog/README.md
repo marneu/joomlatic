@@ -74,6 +74,7 @@ in filter.d/joomla-admin.conf
  [Definition]
  failregex =  .* WARNING login admin ADMIN .* from <HOST>$
 ```
+Depending on your distribution you have to check the failregex, the text WARNING should be set for a failed login only.
 ---
 
 ## History
