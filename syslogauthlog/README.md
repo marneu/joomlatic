@@ -77,6 +77,7 @@ in filter.d/joomla-admin.conf
 ---
 
 ## History
+  - 2016-11-15: Version 1.4: Added it_IT translation (contributed by Marco Petrini)
   - 2016-02-01: Version 1.3: Fix error logging 
   - Version 1.2: Typos corrected
   - Version 1.1: Fix $syslog, $version usage context
