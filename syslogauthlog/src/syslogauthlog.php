@@ -4,7 +4,7 @@
  * @license	http://www.gnu.org/licenses/agpl-3.0.html GNU/AGPL
  * @github	https://github.com/marneu/joomlatic/tree/master/syslogauthlog
  * @homepage	http://www.std-soft.com/index.php/hm-service/81-c-std-service-code/9-joomla-plugin-syslogauthlog
- * @version	1.3
+ * @version	1.6
  */
 
 defined('_JEXEC') or die();
@@ -113,7 +113,7 @@ class PlgSystemSyslogAuthLog extends JPlugin {
 
 	private function log() {
 
-		if (JFactory::getApplication()->isAdmin()) { 
+		if (JFactory::getApplication()->isClient('administrator')) {  // Works from Joomla 3.7 to 4.x
 			$this->field['ADMIN'] = 'ADMIN';
 		}
 		else {
@@ -138,10 +138,8 @@ class PlgSystemSyslogAuthLog extends JPlugin {
 		$jLogEntry = new JLogEntry($message, $this->priority, getenv('USER'));
 
 		// connect to syslog
-		if ( substr( $this->version, 0, 1) == '3' ) {
+		if ( substr( $this->version, 0, 1) == '3' || substr( $this->version, 0, 1) == '4' ) {
 			$this->syslog = new JLogLoggerSyslog($this->syslog_options);
-		} elseif ( substr( $this->version, 0, 1) == '2' ) {
-			$this->syslog = new JLoggerSyslog($this->syslog_options);
 		} else {
 			die ("Unsupported Joomla version for plg syslogauth.");
 		}
