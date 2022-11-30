@@ -79,6 +79,7 @@ Adopt the failregex to your needs, the text WARNING will usually be set only for
 ---
 
 ## History
+  - 2022-11-30: Version 1.6: Updated for Joomla 4 (contributed by Helmut Müller)
   - 2017-03-09: Version 1.5: Added quotes to language strings (suggested by prophoto)
   - 2016-11-15: Version 1.4: Added it-IT translation (contributed by Marco Petrini)
   - 2016-02-01: Version 1.3: Fix error logging 
