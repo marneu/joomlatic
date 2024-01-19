@@ -3,7 +3,7 @@ syslogauthlog
 
 # Joomla! - System - Syslog AuthLog - Plugin
 
-A Syslog authentication logger plugin for Joomla 3.7 and 4.x, which logs selected authentication events to AUTH log.
+A Syslog authentication logger plugin for Joomla 3.7, 4.* and 5.* which logs selected authentication events to AUTH log.
 
 ## Logged Events
 - User login
