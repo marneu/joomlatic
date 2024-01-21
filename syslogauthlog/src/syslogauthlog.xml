@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension version="3.7" type="plugin" group="system" method="upgrade">
-        <name>plg_system_syslogauthlog</name>       
+        <name>System - Syslog Authlog</name>       
         <author>Markus Neubauer</author>
-        <creationDate>December 2022</creationDate>
+        <creationDate>December 2014</creationDate>
         <copyright>Copyright (C) 2014 Markus Neubauer. All rights reserved.</copyright>
         <license>http://www.gnu.org/licenses/agpl-3.0.html GNU/AGPL</license>
         <authorEmail>neubauer@email-online.org</authorEmail>  
         <authorUrl>http://www.std-soft.com/index.php/hm-service/81-c-std-service-code/9-joomla-plugin-syslogauthlog</authorUrl>
-        <version>1.6</version>   
-        <description>PLG_SYSTEM_SYSLOGAUTHLOG_XML_DESCRIPTION</description>      
+        <version>1.7.1</version>   
+        <description>
+	        <div class="tpl-info"> <h2>Syslog Authlog Plugin</h2> <p>You have to activate the Plugin</p> <p>If you need Support <a href="https://www.std-soft.com/hm-service/code/9-joomla-system-plugin-syslog-authlog" class="nav-link">reads German</a> alternate use a translater</p> </div> <style> .tpl-info { overflow: hidden; padding: 20px 0; } .tpl-info p { float: left; width: 60%;} .tpl-info .btn { box-shadow: 0 2px 10px 0 rgba(0,0,0,.16); border: 0; border-radius: 3px; float: right; min-height: 52px; padding: 0 24px; line-height: 52px; transition: all .2s cubic-bezier(.4,0,.2,1); } .tpl-info .btn span { margin-right: 12px;} </style>
+        </description>      
         <files>
                 <filename plugin="syslogauthlog">syslogauthlog.php</filename>
                 <filename>index.html</filename>
@@ -49,8 +51,9 @@
                 </fields>
         </config>
 	<updateservers>
-		<server type="extension" priority="1" name="syslogauthlog Updates">
+		<server type="extension" priority="1" name="System syslogauthlog Plugin Updates">
 			http://www.std-soft.com/syslogauthlog.xml
 		</server>
 	</updateservers>
 </extension>
+
